@@ -107,7 +107,7 @@ Okay we learned how to install packages on Linux systems, but how would you do t
 In this next part, we will use `Ansible` to manage the 5 workstations on our network. What is Ansible? Simply put, it is a systems management automation engine. It allows you to easily perform tasks on remote computers such as changing configuration files, installing software and running programs.
 
 I highly recommend watching this 3 1/2 minute video overview of ansible, from Lynda.com    
-[https://www.linkedin.com/learning/learning-ansible-2020/an-introduction-to-ansible?u=76816226](https://www.linkedin.com/learning/learning-ansible-2020/an-introduction-to-ansible?u=76816226) 
+[https://www.lynda.com/Ansible-tutorials/introduction-Ansible/555799/598693-4.html?org=syracuse.edu](https://www.lynda.com/Ansible-tutorials/introduction-Ansible/555799/598693-4.html?org=syracuse.edu) 
 
 NOTE: You will need to log-in with your NetID and Password.
 
