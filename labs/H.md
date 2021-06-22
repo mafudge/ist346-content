@@ -74,7 +74,7 @@ Now that we have a user with a password, we need to configure Samba to share the
 
 `root@server:/# nano /etc/samba/smb.conf`
 
-The file contains an enormous amount of configuration options. We are going to go right to the bottom of the file and add the code below
+The file contains an enormous amount of configuration options. We are going to go right to the bottom of the file and add the code below:
 
 ```
 [myshare]
@@ -171,37 +171,41 @@ After the server setup is complete and there are no errors we can start the serv
 First check the status.
 So see the status of a service, you can use the following command
 
-`root@server:/# service samba status`
+`root@server:/# service smbd status 
 
 which will output:
 ```
-* nmbd is not running
 * smbd is not running
 ```
 
 Currently our service is not running, lets fix that.
 user the service command to start samba, you will see the output below.
 
-`root@server:/# service samba start`
+`root@server:/# service smbd start`
+
+The output: 
+```
+* Starting SMB/CIFS daemon smbd           [ OK ]
+```
+
+`root@server:/# service nmbd start`
 
 The output: 
 ```
 * Starting NetBIOS name server nmbd       [ OK ]
-* Starting SMB/CIFS daemon smbd           [ OK ]
 ```
+
 
 To stop a service use the following command, **if you stop it don't forget to start it again** before moving onto the client setup!
 
-`root@server:/# service samba stop`
+`root@server:/# service smbd stop`
 
 ```
-* Stopping Samba AD DC daemon samba           [ OK ]
-* Stopping SMB/CIFS daemon smbd               [ OK ]
 * Stopping NetBIOS name server nmbd           [ OK ]
 ```
 
 One more
-`root@server:/# service samba status`
+`root@server:/# service smbd status`
 
 To make sure its running, and if it is, its time to exit the server container:
 
@@ -363,7 +367,10 @@ Now we need to create a **users** Organization Unit
 
 Next we must create the **Samba domain** object:
 1. Click on the root of the tree. 
-1. Click `create child entry` under the root again
+1. If you see:  
+`sambaDomainName=EXAMPLEORG`  then you can skip this step!
+1.  IF YOU DO NOT SEE THE SAMBA DOMAIN. COMPLETE THESE STEPS   
+Click `create child entry` under the root again
 2. Choose `Samba Domain`
 3. for the Samba domain name, enter `EXAMPLEORG`. Under typical circumstances, this is the name of your organization. In this case our organization is `example.org` to the name works!
 4. For the `sambaSID` use this:   
@@ -493,13 +500,13 @@ Bucket is basically a root folder to store files in Minio. To create a bucket cl
 
 Now that we have a bucket, lets use the client to upload a file. We will be using the minio client to interact with our server. Connect to the client:
 
-`PS ist346-labs\lab-H\part3> docker-compose run client`
+`PS ist346-labs\lab-H\part3> docker-compose exec client b ash`
 
-The prompt should say: `/go/src/github.com/minio #`
+The prompt should say: `[root@cleint /]#`
 
 The files we would like to upload from our client can be found in the `/files` folder:
 
-`/go/src/github.com/minio # ls /files`
+`[root@cleint /]# ls /files`
 
 ```
 document.txt  picture.jpg   webpage.html
@@ -512,11 +519,11 @@ Let's configure the minio client to work with our server.
 ```
 
 so specifically, we type:
-`/go/src/github.com/minio # mc config host add myminio http://172.144.1.254:9000 minio minio123`
+`[root@cleint /]# mc config host add myminio http://minioserver:9000 minio minio123`
 
 So in this case the `alias` is `myminio`. Once the server is added let's upload our picture.
 
-`/go/src/github.com/minio # mc cp /files/* myminio/mybucket`
+`[root@cleint /]# mc cp /files/* myminio/mybucket`
 
 If you refresh your browser you should now see the files we uploaded! 
 ![minio files](assets/miniofiles.png)
@@ -551,7 +558,7 @@ This is just a very simple example of how a bucket policy works. The real Amazon
 ### Tear-down
 
 1. Exit the minio client:   
-`/go/src/github.com/minio # exit`
+`[root@cleint /]# # exit`
 2. Bring down the minio server:
 `PS ist346-labs\lab-H\part3> docker-compose down`
 
@@ -562,7 +569,7 @@ This is just a very simple example of how a bucket policy works. The real Amazon
 3. If you want to share a folder through Samba, which file must you edit?
 4. Besides the web interface to LDAP (Hint: there's one for Samba, too). 
 What are the advantages of Samba + LDAP as opposed to simply using Samba?
-5. In part 2, why did we have to restart the `smbserver` after we confgiured the LDAP server?
+5. In part 2, why did we have to restart the `smbserver` after we configured the LDAP server?
 6. Why is it impractical for a company to use  Samba to share files in the cloud with their customers?
 7. Explain how an S3 bucket policy works
 8. If you need to share files with a co-worker, which of the 3 approaches covered in this lab would be used and why?

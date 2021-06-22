@@ -27,19 +27,19 @@ This will bring up an Ubuntu Linux container for you to use as part of the lab.
 
 ### Login to the Linux Container ###
 
-You will need to login to the Linux container as user `scott` with password `IST346`. Once you do that you will be able to follow the videos which are part of the lab. 
+You will need to login to the Linux container as user `scott` with password `IST346`. Once you do that you will be able to follow the videos which are part of the lab. The name of the linux container is `workstation`.
 
 Procedure:
 
 1. Connect the the Linux Container: 
-`PS ist346-labs\lab-B> docker-compose exec linux login`  
+`PS ist346-labs\lab-B> docker-compose exec workstation login`  
 NOTE: The name of the Docker container is `linux` and the command we wish to execute on that container is `login`.
 2. This will initiate a login prompt on the Linux container:  
-`localhost login: `  
+`workstation login: `  
 At the login prompt, enter the user `scott`
 3. At the `password: ` prompt, enter the password `IST346`  
 NOTE: All passwords in the labs are `IST346` unless stated otherwise.
-4. You will now see a Linux Bash command prompt like this:   `scott@localhost:~$ `
+4. You will now see a Linux Bash command prompt like this:   `scott@workstation:~$ `
 
 You are ready to follow along with the lab on Lynda.com
 

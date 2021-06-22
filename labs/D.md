@@ -25,8 +25,8 @@ Since this lab uses, Docker the setup will be a little different.  We need to re
 `PS ist346-labs\lab-D> docker rm $(docker ps -a -q)`
 6. Delete all images:  
 `PS ist346-labs\lab-D> docker rmi $(docker images -q)`
-7. Get the `ubnutu` image from Docker Hub:
-`PS ist346-labs\lab-D> docker pull ubuntu`
+7. Get the `ist346/ubnutu` image from Docker Hub:
+`PS ist346-labs\lab-D> docker pull ist346/ubuntu:latest`
 8. Set the environment variable used in the video. Paste this command into your PowerShell window:
 ```
 $FORMAT="\nID\t{{.ID}}\nIMAGE\t{{.Image}}\nCOMMAND\t{{.Command}}\n
