@@ -26,26 +26,26 @@ In this lab you will learn how to
 
 ## Part 1: Utilizing a host based firewall
 
-The first line of defense for any system is a firewall on the host. Firewalls limit traffic to ports defined by the system administrator. So while the services might be running, the firewall might contain a rule which blocks certian hosts from accessing the service. Potentially, this stops malicious users from accessing the system through ports opened by our services. On Linux many system administrators utilize IPTables to create a firewall. Due to the complexity and flexibility of Iptables we will be using a simplified version called UFW or Uncomplicated Firewall. UFW really does live up to its name it is much easier than IPTables.
+The first line of defense for any system is a firewall on the host. Firewalls limit traffic to ports defined by the system administrator. So while the services might be running, the firewall might contain a rule which blocks certain hosts from accessing the service. Potentially, this stops malicious users from accessing the system through ports opened by our services. On Linux many system administrators utilize IPTables to create a firewall. Due to the complexity and flexibility of Iptables we will be using a simplified version called UFW or Uncomplicated Firewall. UFW really does live up to its name it is much easier than IPTables.
 
 Lets begin by bring up our first docker environment. It a network consisting of a simple webserver, `nginx` and two clients. On client is legitimate and the other is a hacker!
 
 ```
 +--------------+
 | client       |---+
-| 172.44.1.103 |   |
+| 172.44.10.103|   |
 +--------------+   |
                    |
 +--------------+   |
 | hacker       |---+
-| 172.44.1.103 |   |
+| 172.44.10.104|   |
 +--------------+   |
                    |   +---------------+     ++++++++++++++
                    +---| host computer |-----|  Internet  |
                    |   +---------------+     ++++++++++++++
 +--------------+   |
 |   webserver  |---+
-| 172.44.1.102 |
+| 172.44.10.102|
 +--------------+
 ```
 
@@ -100,8 +100,8 @@ This time it works! We see the HTML which would normally display as a webpage in
 ```
 172.44.1.104 - - [15/Oct/2018:14:50:34 +0000] "POST /admin HTTP/1.1" 404 153 "-" "curl/7.47.0" "-"
 ```
-3. The address is `172.44.1.104`, which is visible at the beginning of the line on the logs. Lets block that person by inserting a new rule at position number 1, UFW evaluates rules in order, so we need to make sure our block rule is before the allow all rule for port 80. The status command shows the current rules. Back at the `root@webserver:/#` prompt, type:
-`root@webserver:/# ufw insert 1 deny from 172.44.1.104 to any`  
+3. The address is `172.44.10.104`, which is visible at the beginning of the line on the logs. Lets block that person by inserting a new rule at position number 1, UFW evaluates rules in order, so we need to make sure our block rule is before the allow all rule for port 80. The status command shows the current rules. Back at the `root@webserver:/#` prompt, type:
+`root@webserver:/# ufw insert 1 deny from 172.44.10.104 to any`  
 To insert the rule as the first in the chain.
 4. Next., type:  
 `root@webserver:/# ufw reload`  
@@ -135,13 +135,13 @@ Let's clean up from this part:
 
 ## Part 2: Hardening a Service
 
-Firewalls on the host are just one layer of security. Another thing to consider is disabling the individual features of a service that we do not require as part ofour application. This is referred to as service hardening.  When you do this to every service on the server, its server hardening.
+Firewalls on the host are just one layer of security. Another thing to consider is disabling the individual features of a service that we do not require as part of our application. This is referred to as service hardening.  When you do this to every service on the server, its server hardening.
 
-One of the most used and exposed services on a server is the webserver, it's the most used service on the Internet and is utilized by almost every organization. Being so popular and widely used means, webservers are popular attack targets primary attBut regardless of the webserver they all need to be configured to protect against attacks.
+One of the most used and exposed services on a server is the webserver, it's the most used service on the Internet and is utilized by almost every organization. Being so popular and widely used means, webservers are popular attack targets primary But regardless of the webserver they all need to be configured to protect against attacks.
 
 Cross-site scripting (XSS) is a type of computer security vulnerability typically found in web applications. XSS enables attackers to inject client-side scripts into web pages viewed by other users. A cross-site scripting vulnerability may be used by attackers to bypass access controls such as the same-origin policy. XSS attacks are performed by an attacker inputting a script into a form field on a website such as a comment field on a blog or forum.
 
-These types of attacks can be mitigated by the webserver, by configuring it ot informing the client browser to not download resources from external sources that you do not control.
+These types of attacks can be mitigated by the webserver, by configuring it to informing the client browser to not download resources from external sources that you do not control.
 
 ### Getting Started
 
@@ -168,7 +168,7 @@ Open your browser and go to the demo site. [http://localhost](http://localhost)
 
 You will see the message: `Your site has been hacked!` 
 
-The malicious user has compromised your site by loading an external script in a comment box! The origin of the script is from the site http://localhost:8080. Is that website the hacker's website? If they are a smart hacker, no. More than likey the hacker has hacked that site too and it using badsite to launch attacks.
+The malicious user has compromised your site by loading an external script in a comment box! The origin of the script is from the site http://localhost:8080. Is that website the hacker's website? If they are a smart hacker, no. More than likely the hacker has hacked that site too and it using `badsite` to launch attacks.
 
 This hacker's script only displays a message, but in reality the hacker could capture and collect any data you share with the legitimate site!
 
@@ -279,12 +279,15 @@ You should see the message below, otherwise is will tell you that there is an er
 ```
 2018/10/16 10:45:59 [notice] 28#28: signal process started
 ```
-NOTE: If you get an error you may have to edit the contents of `default.conf` to fix the error. 
-6. Now check your [http://localhost](http://localhost). The message should no longer load because we told the browser not to load external scripts.
+NOTE: If you get an error you may have to edit the contents of `default.conf` to fix the error.   
+
+6. Now check your [http://localhost](http://localhost). The message should no longer load because we told the browser not to load external scripts!
 
 NOTE: If you still see the error message, it is because the hacker's malicious script is still in your browser cache. You should clear your browser's history to remove the script from the cache. 
 
 This is just the beginning of what needs to be done to harden a webserver, check the NGINX documentation for other recommended security practices.
+
+https://docs.nginx.com/nginx/admin-guide/security-controls/
 
 ### Part 2 Tear-Down
 1. Exit the webserver's console:  

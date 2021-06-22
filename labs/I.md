@@ -124,7 +124,7 @@ Auth0 is a cloud-based authentication as a service offering. It allows our appli
 
 Now that Auth0 is setup we can install the Auth0 drupal module, the module is already installed on the website, but it still needs to be configured 
 
-1. On you drupal site, back at `http://localhost:8080` click the `Extend` button at the top. 
+1. On you Drupal site, back at `http://localhost:8080` click the `Extend` button at the top. 
 2. Find the newly installed `Auth0` plugin, which is under the heading `OTHER`, and check the box next to it, and click `install`.
 3. Once the plugin is enabled, click the `Configuration` button at the top. If everything is correct you should see the Auth0 settings under system (show below)
 ![Config Screen](assets/auth0config.png)
@@ -176,7 +176,7 @@ First you need to configure our app allow an HTTP server to run in Heroku (Your 
 
 ## Step 7: On Your Own
 
-Go back and configure Auth0 so that it supports your Heroku website. The URLs should be similar to the test website except the hostname and port will be different.
+Go back and configure Auth0 so that it supports your Heroku website. The URLs should be similar to the test website except the hostname and port will be different. 
 
 ## Questions
 

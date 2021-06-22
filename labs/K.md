@@ -8,7 +8,7 @@ In this lab you will learn
 
 - To Send SMTP (simple mail transport protocol) email messages through telnet (connecting to the service directly) and retrieve email using IMAP.
 - How application-layer TCP protocols like SMTP and IMAP actually work.
-- How to configure mail services for sending and recieving emails.
+- How to configure mail services for sending and receiving emails.
 - How to configure a webmail client to communicate with email services.
 
 ## Before you begin 
@@ -29,18 +29,18 @@ In this lab you will learn
 
 1. To begin start your environment:  
 `PS C:\ist346-labs\lab-K> docker-compose up -d`  
-This will start 3 containers. A `mailserver` email server, containing Postfix (email inbox server) and an SMTP server for outgoing mail, a `roundcube` container, which is a webmail client, and a `telnet` container so you can learn to send SMTP mail manually. 
+This will start 3 containers. A `mailserver` email server, containing Postfix (email inbox server) and an SMTP server for outgoing mail, a `roundcube` container, which is a webmail client, and a `workstation` container so you can learn to send SMTP mail manually. 
 2. Check that your services are running:  
 `PS C:\ist346-labs\lab-K> docker-compose ps`  
 
 ## Send Mail with SMTP using the Telnet client
 
-We can send and recieve mail using the [https://en.wikipedia.org/wiki/Telnet](https://en.wikipedia.org/wiki/Telnet) program. This allows us to interact with the mail server from our terminal at the protocol level. We will Telnet into the SMTP service on mailserver and then issue protocol commands to send an email. It's a great way to see how the SMTP (simple mail transport protocol) actually goes about sending an email.
+We can send and receive mail using the [https://en.wikipedia.org/wiki/Telnet](https://en.wikipedia.org/wiki/Telnet) program. This allows us to interact with the mail server from our terminal at the protocol level. We will Telnet into the SMTP service on mailserver and then issue protocol commands to send an email. It's a great way to see how the SMTP (simple mail transport protocol) actually goes about sending an email.
 
 1. First login to the telnet client.  
-`PS C:\ist346-labs\lab-K> docker compose exec telnet bash`
+`PS C:\ist346-labs\lab-K> docker compose exec workstation bash`
 2. Once logged in we can start the telnet interface.  
-`root@telnet:/# telnet`
+`root@workstation:/# telnet`
 3. From the telnet prompt connect to the SMTP service on the `mailserver` to send an email. This is TCP port 25, the well-known port number for SMTP:  
 ```
 telnet> open mailserver 25
@@ -51,7 +51,7 @@ Escape character is '^]'.
 ```
 4. Once connected to the mailserver you can test the server connection:
 `ehlo mycompany.com`  
-You should see this:  
+You should see output similar to this:  
 ```
 250-mail.mycompany.com
 250-PIPELINING
@@ -80,8 +80,10 @@ And you will see the message:
 8. Then enter the following:
 ```
 Subject: Test Email
+From: Me a name I call myself
+Date: 7/4/2021
 
-My Test Email
+My Test Email from me!
 .
 ```
 Don't forget the . at the end!   
@@ -132,7 +134,7 @@ There's our one email we sent via the SMTP service!
 
 6. Let's read that email: 
 `a FETCH 1 BODY[]`
-You should see your test email that you sent through the server. Not as pretty as gmail! Haha
+You should see your test email that you sent through the server. Not as pretty as GMail! Haha
 
 ```
 * 1 FETCH (BODY[] {1393}
@@ -184,7 +186,7 @@ The value of Telnet is it helps you understand how the protocol works. You can u
 
 ## Using an actual mail client. 
 
-Now let's try an actual mail client. I think most of you understand how to use an email client, so instead we will think about how it works under the hood using SMTP and IMAP. The `roundcube` container is running a web-based email client on port TCP/8080. We should be able to use it to login and send and recieve emails.
+Now let's try an actual mail client. I think most of you understand how to use an email client, so instead we will think about how it works under the hood using SMTP and IMAP. The `roundcube` container is running a web-based email client on port TCP/8080. We should be able to use it to login and send and receive emails.
 
 1. Open [http://localhost:8080](http://localhost:8080) in your browser. 
 2. You should see the roundcube login. You can login with **myuser@mycompany.com** and **mypassword**. Sound familiar? They are the same username and password we used to connect to IMAP!
@@ -197,7 +199,7 @@ Subject: Another email.
 Body: This is another email!  
 8. Click **Send**. When you send this email, the client actually does TWO things: 1) It uses SMTP to send the email to **myuser@mycompany.com** and then 2) It uses IMAP to save a copy of the email in the Sent folder. 
 9. Open the **Sent** folder to verify. You should see the email you sent in that folder. 
-10. Switch back to the other browser where you are logged in as **myuser@mycompany.com** has the new message arrived yet? How does the client know to check for new messages? The answer is it asks the IMAP server every XX seconds. That right to make new email magically arrive in your inbox, the client must connect to the mailserver over IMAP and execute an `a examine inbox` command!
+10. Switch back to the other browser where you are logged in as **myuser@mycompany.com** has the new message arrived yet? How does the client know to check for new messages? The answer is it asks the IMAP server every XX seconds. That right to make new email magically arrive in your inbox, the client must connect to the mail server over IMAP and execute an `a examine inbox` command!
 
 ## Concluding remarks
 
@@ -206,7 +208,7 @@ That is about the limit of what you can do with our simple mail setup. It should
 2. We did not use TLS (transport-layer security) encryption for SMTP or IMAP. This is the equivalent to HTTPS for email, encrypting messages over the network.
 3. We do not have a junk mail / anti-spam system setup to prevent unwanted or dangerous messages from hitting user's inboxes.
 4. There's no directory service integration. If you want to send someone and email, you must know their email address! 
-5. We have no scaling strategy. Typically we scale SMTP with a round-robin configruation. We scale IMAP by distributing users mailboxes over multiple servers.
+5. We have no scaling strategy. Typically we scale SMTP with a round-robin configuration. We scale IMAP by distributing users mailboxes over multiple servers.
 
 ## Tear-down
 
@@ -223,7 +225,7 @@ To tear down this lab:
    4. A FETCH 
    5. telnet
 3. What is the value of using Telnet to connect to any TCP protocol?
-4. Web browsers implement the client version of the HTTP protocol. Based on what you did in this lab, what do you think the brower is doing with respect to the HTTP protocol when we as it to load a website?
+4. Web browsers implement the client version of the HTTP protocol. Based on what you did in this lab, what do you think the browser is doing with respect to the HTTP protocol when we as it to load a website?
 5. Which protocol(s) are used to list messages in a folder?
 6. When you send an email from an actual mail client, which protocol(s) are used and why?
 7. What are the purpose of the email message headers?
