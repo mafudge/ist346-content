@@ -24,7 +24,7 @@ NOTE: If you are running the labs from your personal computer, you can skip this
 In this part you will become familiar with the ITELL (vLab). The ITELL vLab provides a logged in user with a means to access other computers remotely. Unlike remote lab, these computers are configured for very specific tasks, usually associated with a course. Because it would be wasteful to setup a physical computer for each students, ITELL vLab uses *virtual machines* (VM) which are virtual computers running on top of a physical computer. All of the virtual machines running on the host computer share its resources of CPU, RAM and Disk. 
 
 Follow these instructions to connect to the ITELL vLab:  
-[https://answers.syr.edu/x/coENB](https://answers.syr.edu/x/coENB)
+[https://answers.syr.edu/x/ZwL-Aw](https://answers.syr.edu/x/ZwL-Aw)
 
 Once you are connected, follow these instructions to navigate to your the Virtual Machine used in this course,  and Power It On, and access the Console: [https://answers.syr.edu/x/bQL-Aw](https://answers.syr.edu/x/bQL-Aw) 
 
