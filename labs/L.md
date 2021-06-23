@@ -31,7 +31,7 @@ Building a mobile application is beyond the scope of this lab, so instead we wil
 `PS > cd ist346-labs`
 3. Update your git repository to the latest version:  
 `PS ist346-labs> git pull origin master`
-4. Change the working directory to the `lab-O` folder:  
+4. Change the working directory to the `lab-L` folder:  
 `PS ist346-labs> cd lab-L`
 
 ## Creating the API

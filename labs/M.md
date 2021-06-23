@@ -1,8 +1,8 @@
 # Lab M - Internet of Things
 
-The Internet of Things or IoT reprsents technlogies embedded into everyday objects so that thet can communicate over the Internet. From WiFi tooth brushes to traffic cameras, it seems like nothing is immune from the IoT craze.
+The Internet of Things or IoT represents technologies embedded into everyday objects so that they can communicate over the Internet. From WiFi tooth brushes to traffic cameras, it seems like nothing is immune from the IoT craze.
 
-Anything connected to a network can be considered an IoT device, your cell phone, a sensor, another computer, camera, etc. In this lab we will simulate a "smart drinking glass" which every time the drinking glass is set down on a flat surface will communicate over the Internet how much liquid remains. It sends this data to the Internet in the form of a percentage; from there we will us common IoT tools to build a data pipeline based on the data web we recieve.
+Anything connected to a network can be considered an IoT device, your cell phone, a sensor, another computer, camera, etc. In this lab we will simulate a "smart drinking glass" which every time the drinking glass is set down on a flat surface will communicate over the Internet how much liquid remains. It sends this data to the Internet in the form of a percentage; from there we will us common IoT tools to build a data pipeline based on the data web we receive.
 
 Normally there are 1,000's of sensors, so how do we keep track of the messages? This is handled by the MQTT protocol, which is a machine to machine protocol for the Internet of Things. The MQTT Broker collects messages from the sensors and queues them until the Node Red platform is ready to consume and process them. This extra layer is important with IoT networks as the MQTT broker prevents loss of data over the network between sensors and platforms which process the data. Without MQTT we would not be able to make changes to the IoT platform without losing data!
 
@@ -61,7 +61,7 @@ Little to no actual processing occurs in an Iot sensor.  All our beer glass sens
 ![Node Red Dashboard](assets/nr-dashboard.png)
 2. Our device is using the MQTT protocol, to access our device we need to add a mqtt input. You can do that by dragging and dropping the input from the left to the blank area on the screen.  
 ![MQTT Input](assets/mqtt-input.png)
-3. Right now the input is not connected to the device(s). In fact it never actually connects to the devices, but instead listens for messages to arrive on our MQTT broker. To configure that **double click** on the mqtt input you dropped onto the screen. When the modal dialog opens you will need to add a broker by clicking the pencil on the right of the server input box.
+3. Right now the input is not connected to the device(s). In fact it never actually connects to the devices, but instead listens for messages to arrive on our MQTT broker. To configure that **double click** on the MQTT input you dropped onto the screen. When the modal dialog opens you will need to add a broker by clicking the pencil on the right of the server input box.
 4. Enter the the broker name `mosquitto` as shown below and click **Add** or **Update**  
 ![Broker Config](assets/broker.png)
 5. An MQTT topic is the channel for the IoT data. One MQTT broker can handle millions of messages so we use topics to categorize messages similar to each other. Back on the first modal, enter `sensor` for the topic as seen in this screenshot:  
@@ -102,10 +102,10 @@ Screenshot:
 ![Http Request Config](assets/httprequest.png)
 15. Click **deploy** to publish our new workflow. Go back to the sensor and test it again, if everything is working you should get an email that the container is empty!
 
-When you empty the IoT glass, you should recieve an email to refill your beer! It might take a minute or two for the email to send so be patient!
+When you empty the IoT glass, you should receive an email to refill your beer! It might take a minute or two for the email to send so be patient!
 
 ## Tear Down
-Besure to tear down this lab when you are finished:
+Be sure to tear down this lab when you are finished:
 `PS ist346-labs\lab-M> docker-compose down`  
 
 ## Questions

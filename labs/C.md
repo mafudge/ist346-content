@@ -158,7 +158,7 @@ NOTE: WE didn't have to put in `:80` for the port. This is assumed by the `lynx`
 
 ### SSH and Netstat
 
-In this last section we will connect to the server from the workstation using ssh and verify the open ports locally.
+In this last section we will connect to the server from the workstation using ssh (secure shell) and verify the open ports locally.
 
 1. Let's use ssh to connect to the ssh service on the server. ssh or secure socket shell allows us to access the shell of a remote computer. Type:  
 `root@workstation:/# ssh root@server`  
@@ -187,7 +187,6 @@ You should see the `*:http` and `*:ssh` services running, as a client `labC_work
 To tear down this lab:
 
 1. `PS ist346-labs\lab-C> docker-compose down` 
-
 
 ## Questions 
 

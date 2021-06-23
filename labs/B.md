@@ -27,19 +27,19 @@ This will bring up an Ubuntu Linux container for you to use as part of the lab.
 
 ### Login to the Linux Container ###
 
-You will need to login to the Linux container as user `scott` with password `IST346`. Once you do that you will be able to follow the videos which are part of the lab. 
+You will need to login to the Linux container as user `scott` with password `IST346`. Once you do that you will be able to follow the videos which are part of the lab. The name of the linux container is `workstation`.
 
 Procedure:
 
 1. Connect the the Linux Container: 
-`PS ist346-labs\lab-B> docker-compose exec linux login`  
+`PS ist346-labs\lab-B> docker-compose exec workstation login`  
 NOTE: The name of the Docker container is `linux` and the command we wish to execute on that container is `login`.
 2. This will initiate a login prompt on the Linux container:  
-`localhost login: `  
+`workstation login: `  
 At the login prompt, enter the user `scott`
 3. At the `password: ` prompt, enter the password `IST346`  
 NOTE: All passwords in the labs are `IST346` unless stated otherwise.
-4. You will now see a Linux Bash command prompt like this:   `scott@localhost:~$ `
+4. You will now see a Linux Bash command prompt like this:   `scott@workstation:~$ `
 
 You are ready to follow along with the lab on Lynda.com
 
@@ -49,7 +49,7 @@ All Syracuse University students have accounts on Lynda.com, a leading technolog
 
 1. Nagivate your web browser to https://lynda.syr.edu 
 2. This will prompt you with a Syracuse University login screen. Login with your Syracuse University **NetID** and **Password**. 
-3. Once your are logged on you will see the Lynda.com home page. You can jump directly to the course here: [https://www.linkedin.com/learning/learning-linux-command-line-2/learning-linux-command-line?org=syracuse.edu](https://www.linkedin.com/learning/learning-linux-command-line-2/learning-linux-command-line?org=syracuse.edu) 
+3. Once your are logged on you will see the Lynda.com home page. You can jump directly to the course here: [https://www.lynda.com/IT-tutorials/Learning-Linux-Command-Line/753913-2.html?org=syracuse.edu](https://www.lynda.com/IT-tutorials/Learning-Linux-Command-Line/753913-2.html?org=syracuse.edu) 
 
 The entire course is about 2 hours long. We will only complete parts 2, 3 and 4 which should take you about 90 minutes. 
 
@@ -60,7 +60,7 @@ NOTE: You'll probably want to use a pair of headphones so you can listen to the 
 ## Learning the Linux Command Line ##  
 
 You should follow along with the Lynda.com video 
-[https://www.linkedin.com/learning/learning-linux-command-line-2/what-is-the-command-line?org=syracuse.edu](https://www.linkedin.com/learning/learning-linux-command-line-2/what-is-the-command-line?org=syracuse.edu)
+[https://www.lynda.com/IT-tutorials/Learning-Linux-Command-Line/753913-2.html?org=syracuse.edu](https://www.lynda.com/IT-tutorials/Learning-Linux-Command-Line/753913-2.html?org=syracuse.edu)
  starting for these chapters:
 
 - **2. Command-Line Basics** -- The Full Chapter (approx. 15 minutes of video

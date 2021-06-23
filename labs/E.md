@@ -14,16 +14,16 @@ In this lab, we will have one server computer, running Ansible, and 5 identical 
 ```
 +-------------+
 | workstations|----+
-| 172.44.1.2  |    |
+| 172.44.5.2  |    |
 | through     |    |
-| 172.44.1.6  |    |
+| 172.44.5.6  |    |
 +-------------+    |
                    |   +---------------+     ++++++++++++++
                    +---| host computer |-----|  Internet  |
                    |   +---------------+     ++++++++++++++
 +--------------+   |
 |   server     |---+
-| 172.44.1.254 |
+| 172.44.5.254 |
 +--------------+
 ```
 
@@ -56,7 +56,7 @@ Let's issue some commands to see how the `apt` package system works.
 `PS ist346-labs\lab-E> docker-compose exec server bash`  
 You will now see the bash command prompt `root@server:/#`
 1. From the bash prompt, let's update the package database:  
-`root@server:/# apt-get update`  
+`root@server:/# apt-get update` 
 This updates the list of packages from the available repositories.
 1. Let's install the package `nethack-console` which is a text-based dungeon crawl game. To install, type:  
 `root@server:/# apt-get install -y nethack-console`  
@@ -107,7 +107,7 @@ Okay we learned how to install packages on Linux systems, but how would you do t
 In this next part, we will use `Ansible` to manage the 5 workstations on our network. What is Ansible? Simply put, it is a systems management automation engine. It allows you to easily perform tasks on remote computers such as changing configuration files, installing software and running programs.
 
 I highly recommend watching this 3 1/2 minute video overview of ansible, from Lynda.com    
-[https://www.linkedin.com/learning/learning-ansible-2020/an-introduction-to-ansible?u=76816226](https://www.linkedin.com/learning/learning-ansible-2020/an-introduction-to-ansible?u=76816226) 
+[https://www.lynda.com/Ansible-tutorials/introduction-Ansible/555799/598693-4.html?org=syracuse.edu](https://www.lynda.com/Ansible-tutorials/introduction-Ansible/555799/598693-4.html?org=syracuse.edu) 
 
 NOTE: You will need to log-in with your NetID and Password.
 
@@ -222,7 +222,7 @@ Let's use this playbook.
 
 1. First download the playbook file to the server:  
 `root@server:/# curl -o ruby.yml -L https://raw.githubusercontent.com/mafudge/ist346-labs/master/lab-E/ruby.yml`  
-This will download the `ruby.yml` file from github to your computer.
+This will download the `ruby.yml` file from github to your `server` container.
 1. Check to make sure the file is there:  
 `root@server:/# cat ruby.yml`  
 The playbook file output should be similar to code you see above.

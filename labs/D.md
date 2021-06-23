@@ -25,8 +25,8 @@ Since this lab uses, Docker the setup will be a little different.  We need to re
 `PS ist346-labs\lab-D> docker rm $(docker ps -a -q)`
 6. Delete all images:  
 `PS ist346-labs\lab-D> docker rmi $(docker images -q)`
-7. Get the `ubnutu` image from Docker Hub:
-`PS ist346-labs\lab-D> docker pull ubuntu`
+7. Get the `ist346/ubnutu` image from Docker Hub:
+`PS ist346-labs\lab-D> docker pull ist346/ubuntu:latest`
 8. Set the environment variable used in the video. Paste this command into your PowerShell window:
 ```
 $FORMAT="\nID\t{{.ID}}\nIMAGE\t{{.Image}}\nCOMMAND\t{{.Command}}\n
@@ -37,7 +37,7 @@ CREATED\t{{.RunningFor}}\nSTATUS\t{{.Status}}\nPORTS\t{{.Ports}}\nNAMES\t{{.Name
 
 1. Navigate your web browser to https://lynda.syr.edu 
 2. This will prompt you with a Syracuse University login screen. Login with your Syracuse University **NetID** and **Password**. 
-3. Once your are logged on you will see the Lynda.com home page. You can jump directly to the course here: [https://www.linkedin.com/learning/learning-docker-2/why-create-containers-using-docker?org=syracuse.edu](https://www.linkedin.com/learning/learning-docker-2/why-create-containers-using-docker?org=syracuse.edu) 
+3. Once your are logged on you will see the Lynda.com home page. You can jump directly to the course here: [https://www.lynda.com/Docker-tutorials/Learning-Docker/485649-2.html?org=syracuse.edu](https://www.lynda.com/Docker-tutorials/Learning-Docker/485649-2.html?org=syracuse.edu) 
 
 The entire course is about 3 hours long. We will only complete part 2 which should take you about 60 minutes.
 
@@ -50,14 +50,14 @@ NOTE: You'll probably want to use a pair of headphones so you can listen to the 
 ### What is Docker? ###
 
 Start by watching the following video: What is docker?
-[https://www.linkedin.com/learning/learning-docker-2/what-is-docker?org=syracuse.edu](https://www.linkedin.com/learning/learning-docker-2/what-is-docker?org=syracuse.edu) 
+[https://www.lynda.com/Docker-tutorials/What-Docker/721901/779036-4.html?org=syracuse.edu](https://www.lynda.com/Docker-tutorials/What-Docker/721901/779036-4.html?org=syracuse.edu) 
 
 ## Docker Commands ##
 
 Follow along with the Lynda.com video for this chapter:
 
 - **2. Using Docker** -- Full Chapter (Approx 55 minutes) from here:     
-[https://www.linkedin.com/learning/learning-docker-2/the-docker-flow-images-to-containers?org=syracuse.edu](https://www.linkedin.com/learning/learning-docker-2/the-docker-flow-images-to-containers?org=syracuse.edu)
+[https://www.lynda.com/Docker-tutorials/Learning-Docker/485649-2.html?org=syracuse.edu](https://www.lynda.com/Docker-tutorials/Learning-Docker/485649-2.html?org=syracuse.edu)
 
 Important Tips: 
 

@@ -55,7 +55,7 @@ You will use the `chrome` web browser on your host computer to access the web se
 Notice how we've included `-f 2-tier.yml` to the command to specify that specific docker-compose file.
 1. Let's see what's running:  
 `PS ist346-labs\lab-F> docker-compose -f 2-tier.yml ps`  
-The output should reveal that a container named `nginx2` is running. Furthermore the container has TCP ports 22 and 80 in use, but only port 80 is exposed to the host `0.0.0.0:80 -> 80/tcp`
+The output should reveal that a container named `nginx` is running. Furthermore the container has TCP ports 22 and 80 in use, but only port 80 is exposed to the host `0.0.0.0:80 -> 80/tcp`
 1. Let's view our website:  
 Open up a browser, like chrome on your host, and enter the following address: `http://localhost:80`  
 1. You should see the **Fudgemart.com** website:  
@@ -81,7 +81,7 @@ Let's view the log output in real time so we can see logging in action.
 ```
 
 3. From the `powershell 1` window, let's connect to the console of the web server:  
-`PS ist346-labs\lab-F> docker-compose -f 2-tier.yml exec nginx2 bash`    
+`PS ist346-labs\lab-F> docker-compose -f 2-tier.yml exec nginx bash`    
 When you do this correctly, you should see the the Linux Bash prompt: `root@webserver:/#`   
 4. Next, let's start watching changes to the Nginx `access.log` file. This file, as configured by the Nginx service, records all requests made to the web server by any clients. To watch the file for changes, type:  
 `root@webserver:/# tail -F /var/log/nginx/access.log`   
@@ -94,7 +94,7 @@ You should see that Nginx reports **404 Not Found** back to the browser. Also in
 
 You might be wondering about the information you see in the log. The log is entries are in the [Common Log format](https://en.wikipedia.org/wiki/Common_Log_Format). Specifically:
 
-1. Client IP Address `172.44.1.1` in the log you see.
+1. Client IP Address `172.44.6.1` in the log you see.
 1. The next two dashes `- -` represent the user identifier and logged in user requesting the document, since we are accessing without logging in, these are `- -`.
 1. The date and time of the request `[11/Sep/2018:4:50:00]`
 1. The actual request made, example `"GET /hackme HTTP/1.1"`, means the client made a `GET` request to the resource `/hackme` using the `HTTP/1.1` protocol.  There are different [Request Methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) you can make as part of the HTTP/1.1 protocol.
@@ -127,7 +127,7 @@ And add the following line beneath it: `<li>Sporting Goods</li>` so that the mar
 ```
 
 4. Let's close the `notepad` utility, and make sure to save the file when you exit.
-5. Go back to your `browser` and enter the website `http://localhost` you should now see an updated page with **Sporting Goods** added as a department. 
+5. Go back to your `browser` and enter the website `http://localhost:80` you should now see an updated page with **Sporting Goods** added as a department. 
 ![updated page with sporting goods](images/lab-f-2-tier-fudgemart2.png)
 6. Also look at the log output in the `powershell 1` window. You should see `"GET /"` with a `200` status code indicating the response was OK. 
 7. If you re-load the page notice the response code is once again `304` because the content was not modified.
@@ -167,7 +167,7 @@ Let's explore how this 3 tier setup works and at the same time demonstrate the a
 `PS ist346-labs\lab-F> docker-compose -f 3-tier.yml up -d`
 1. Let's  make sure it's running:  
 `PS ist346-labs\lab-F> docker-compose -f 3-tier.yml ps`  
-The output should reveal that two containers are running `nginx3` exposing tcp port `80` and `mkdocs` exposing tcp port `8000`
+The output should reveal that two containers are running `nginx` exposing tcp port `80` and `mkdocs` exposing tcp port `8000`
 1. Let's view our website:  
 Open up a browser, like chrome on your host, and enter the following address: `http://localhost:80` 
 1. You should see the **Fudgemart.com**  website:  
@@ -179,8 +179,8 @@ The site looks quite different! This is what the MKDocs application does for us 
 This docker setup has the logs configured to redirect to stdout. This allows us to use `docker-compose` to inspect the logs. This is a common method of logging while you are testing your container setup.
 
 1. To view the `nginx` logs, type:  
-`PS ist346-labs\lab-F> docker-compose -f 3-tier.yml logs nginx3`    
-Note that `nginx3` is the name of the container service.  
+`PS ist346-labs\lab-F> docker-compose -f 3-tier.yml logs nginx`    
+Note that `nginx` is the name of the container service.  
 You should see quite a bit more information in the output because the one page we see from our `"GET /"` is actually made up of several other supporting files and scripts.  
 1. Let's view the MKDocs application logs, type:  
 `PS ist346-labs\lab-F> docker-compose -f 3-tier.yml logs mkdocs`   
@@ -225,7 +225,7 @@ In this final part we will deploy an N-tier content/blog application, [wordpress
 `PS ist346-labs\lab-F> docker-compose -f n-tier.yml up -d`
 1. Let's  make sure it's running:  
 `PS ist346-labs\lab-F> docker-compose -f n-tier.yml ps`  
-The output should reveal three containers are running `nginxn` exposing tcp port `80` and `wordpress` exposing tcp port `8080` and `mysql` exposing tcp `3306`.
+The output should reveal three containers are running `nginx` exposing tcp port `80` and `wordpress` exposing tcp port `8080` and `mysql` exposing tcp `3306`.
 1. Load the WordPress site in your browser, type: `http://localhost`.   
 Please note it takes some time for the application to initialize. If you go to localhost and get an nginx error, please reload the page until you see the WordPress setup. 
 1. Follow the prompts for the WordPress setup.  
